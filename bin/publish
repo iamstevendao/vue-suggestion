@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+version=${1:-patch}
+git up
+npm version $version
+git push -v --progress
+git push --tags
+npm publish
