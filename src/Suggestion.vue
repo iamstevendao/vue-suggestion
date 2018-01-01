@@ -11,14 +11,19 @@
             @focus="focus" 
             @input="inputChange"
             @keyup.enter="keyEnter" 
-            @keydown.tab="keyEnter" 
             @keydown.up="keyUp" 
             @keydown.down="keyDown">
     </div>
-    <div class="vue-suggestion-list" v-if="showList">
-      <div class="vue-suggestion-list-item" v-for="item, i in items" @click="onClickItem(item)"
-           :class="{'vue-suggestion-item-active': i === cursor}" @mouseover="cursor = i">
-        <div :is="componentItem" :item="item" :searchText="searchText"></div>
+    <div class="vue-suggestion-list" 
+        v-if="showList">
+      <div class="vue-suggestion-list-item" 
+          v-for="item, i in items" 
+          @click="onSelectItem(item)"
+          :class="{'vue-suggestion-item-active': i === cursor}" 
+          @mouseover="cursor = i">
+        <div :is="componentItem" 
+            :item="item" 
+            :searchText="searchText"></div>
       </div>
     </div>
   </div>
@@ -39,7 +44,6 @@ export default {
       default: item => item
     },
     items: { type: Array, default: [] },
-    autoSelectOneItem: { type: Boolean, default: true },
     placeholder: String,
     inputClass: { type: String, default: 'vue-suggestion-input' },
     disabled: { type: Boolean, default: false },
@@ -56,14 +60,7 @@ export default {
     inputChange() {
       this.showList = this.isAbleToShowList();
       this.cursor = -1
-      // this.onSelectItem(null, 'inputChange')
-      // utils.callUpdateItems(this.searchText, this.updateItems)
-      this.updateItems();
-      this.$emit('change', this.searchText)
-    },
-
-    updateItems() {
-      this.$emit('update-items', this.searchText)
+      this.$emit('onInputChange', this.searchText)
     },
 
     isAbleToShowList() {
@@ -78,55 +75,33 @@ export default {
     },
 
     blur() {
-      this.$emit('blur', this.searchText)
-      setTimeout(() => this.showList = false, 200)
-    },
-
-    onClickItem(item) {
-      this.onSelectItem(item)
-      this.$emit('item-clicked', item)
+      this.showList = false;
     },
 
     onSelectItem(item) {
       if (item) {
-        // this.internalItems = [item]
         this.searchText = this.setLabel(item)
-        this.$emit('item-selected', item)
-      } else {
-        // this.setItems(this.items)
+        this.$emit('onSelected', item)
       }
-      this.$emit('input', item)
-    },
-
-    isSelecteValue(value) {
-      return 1 == this.items.length && value == this.items[0]
     },
 
     keyUp() {
-      if (this.cursor > -1) {
-        this.cursor--
-        this.itemView(this.$el.getElementsByClassName('vue-suggestion-list-item')[this.cursor])
+      if (this.cursor > 0) {
+        this.cursor--;
       }
     },
 
     keyDown() {
-      if (this.cursor < this.items.length) {
-        this.cursor++
-        this.itemView(this.$el.getElementsByClassName('vue-suggestion-list-item')[this.cursor])
-      }
-    },
-
-    itemView(item) {
-      if (item && item.scrollIntoView) {
-        item.scrollIntoView(false)
+      if (this.cursor < this.items.length - 1) {
+        this.cursor++;
       }
     },
 
     keyEnter() {
       const index = this.cursor < 0 ? 0 : this.cursor;
       if (this.showList && this.items[index]) {
-        this.onSelectItem(this.items[index])
-        this.showList = false
+        this.onSelectItem(this.items[index]);
+        this.showList = false;
       }
     },
 
@@ -134,10 +109,7 @@ export default {
 
   watch: {
     value(newValue) {
-      if (!this.isSelecteValue(newValue)) {
-        this.onSelectItem(newValue)
-        this.searchText = this.setLabel(newValue)
-      }
+      this.searchText = this.setLabel(newValue)
     }
   }
 }
