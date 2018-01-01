@@ -10,9 +10,9 @@
             @blur="blur" 
             @focus="focus" 
             @input="inputChange"
-            @keyup.enter="keyEnter" 
-            @keydown.up="keyUp" 
-            @keydown.down="keyDown">
+            @keyup.enter.prevent="keyEnter" 
+            @keydown.up.prevent="keyUp" 
+            @keydown.down.prevent="keyDown">
     </div>
     <div class="vue-suggestion-list" 
         v-if="showList">
@@ -22,8 +22,7 @@
           :class="{'vue-suggestion-item-active': i === cursor}" 
           @mouseover="cursor = i">
         <div :is="componentItem" 
-            :item="item" 
-            :searchText="searchText"></div>
+            :item="item"></div>
       </div>
     </div>
   </div>
@@ -53,13 +52,13 @@ export default {
     return {
       searchText: '',
       showList: false,
-      cursor: -1,
+      cursor: 0,
     }
   },
   methods: {
     inputChange() {
       this.showList = this.isAbleToShowList();
-      this.cursor = -1
+      this.cursor = 0
       this.$emit('onInputChange', this.searchText)
     },
 
@@ -91,16 +90,15 @@ export default {
       }
     },
 
-    keyDown() {
+    keyDown(e) {
       if (this.cursor < this.items.length - 1) {
         this.cursor++;
       }
     },
 
     keyEnter() {
-      const index = this.cursor < 0 ? 0 : this.cursor;
-      if (this.showList && this.items[index]) {
-        this.onSelectItem(this.items[index]);
+      if (this.showList && this.items[this.cursor]) {
+        this.onSelectItem(this.items[this.cursor]);
         this.showList = false;
       }
     },
