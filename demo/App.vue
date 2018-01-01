@@ -1,25 +1,23 @@
 <template lang="pug">
 div(style="text-align: center;")
-  h2 Type some animal name to search
+  p
+    b(style="font-size: 25px;") Vue Suggestion 
+    span(style="font-size: 13px;") [
+      a(href="https://github.com/iamstevendao/vue-suggestion") github
+      | ]
+  span(style="color: grey;") made with &#x2764; by Steven.
+  p: span Press enter to select the first item in the suggestion list
 
   vue-suggestion(:items="items" 
                 v-model='item', 
-                :set-label='setLabel',
-                @update-items='update', 
-                :component-item='tpl', 
-                @item-selected="itemSelected", 
-                @item-clicked="itemClicked", 
-                :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}")
-  p Selected item:
-  pre {{ item }}
+                :setLabel='setLabel',
+                :template='tpl', 
+                @onInputChange='update', 
+                @onItemSelected="itemSelected")
 
-  hr
-  p.left.note
-    b Note:&nbsp;
-    | The vue-suggestion component does not contain any css. Therefore, you can customize the appearence for any framework by applying style to the generated classes.
-    br
-    b
-      a(href="https://github.com/paliari/vue-suggestion#what-about-appearence", target="_blank") See an example
+  p Selected item:
+  code {{ item }}
+
 </template>
 
 <script>
@@ -41,9 +39,6 @@ export default {
     itemSelected(item) {
       console.log('Selected item!', item)
     },
-    itemClicked(item) {
-      console.log('You clicked an item!', item)
-    },
     setLabel(item) {
       return item.name
     },
@@ -56,79 +51,50 @@ export default {
 }
 </script>
 
-<style src="./style.css"></style>
-<style lang="stylus">
-.vue-suggestion {
-  .vue-suggestion-input-group {
-    .vue-suggestion-input {
-      font-size: 1.5em;
-      padding: 10px 15px;
-      box-shadow: none;
-      border: 1px solid #157977;
-      width: calc(100% - 32px);
-      outline: none;
-      background-color: #eee;
-    }
-
-    &.vue-suggestion-selected {
-      .vue-suggestion-input {
-        color: green;
-        background-color: #f2fff2;
-      }
-    }
-  }
-
-  .vue-suggestion-list {
-    width: 100%;
-    text-align: left;
-    border: none;
-    border-top: none;
-    max-height: 400px;
-    overflow-y: auto;
-    border-bottom: 1px solid #157977;
-
-    .vue-suggestion-list-item {
-      cursor: pointer;
-      background-color: #fff;
-      padding: 10px;
-      border-bottom: 1px solid #157977;
-      border-left: 1px solid #157977;
-      border-right: 1px solid #157977;
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &:hover {
-        background-color: #eee;
-      }
-
-      abbr {
-        opacity: 0.8;
-        font-size: 0.8em;
-        display: block;
-        font-family: sans-serif;
-      }
-    }
-  }
+<style>
+.vue-suggestion .vue-suggestion-input-group .vue-suggestion-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  color: #464a4c;
+  outline: none;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #cecece;
+  border-radius: 0.25rem;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-pre {
+.vue-suggestion .vue-suggestion-input-group .vue-suggestion-input:focus {
+  border: 1px solid #023d7b;
+}
+
+.vue-suggestion .vue-suggestion-list {
+  width: 100%;
   text-align: left;
-  white-space: pre-wrap;
-  background-color: #eee;
-  border: 1px solid silver;
-  padding: 20px !important;
-  border-radius: 10px;
-  font-family: monospace !important;
+  border: none;
+  border-top: none;
+  max-height: 400px;
+  overflow-y: auto;
+  border-bottom: 1px solid #023d7b;
 }
 
-.left {
-  text-align: left;
-}
-
-.note {
-  border-left: 5px solid #ccc;
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
+  cursor: pointer;
+  background-color: #fff;
   padding: 10px;
+  border-left: 10px solid #023d7b;
+  border-right: 1px solid #023d7b;
+}
+
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:last-child {
+  border-bottom: none;
+}
+
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:hover {
+  background-color: #eee;
 }
 </style>
