@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "description": "Suggestion list input for Vue.js",
   "author": "Steven Dao <iamstevendao@gmail.com>",
-  "main": "dist/v-autocomplete.js",
+  "main": "dist/vue-suggestion.js",
   "license": "MIT",
-  "repository": "https://github.com/iamstevendao/v-suggestion",
+  "repository": "https://github.com/iamstevendao/vue-suggestion",
   "scripts": {
     "dist": "poi build ./src/vue-suggestion.js --format umd --module-name VueSuggestion --filename.js vue-suggestion.js --filename.css vue-suggestion.css --no-sourceMap --no-html",
     "dist:demo": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-suggestion.css --no-sourceMap --dist ./docs",
     "start": "yarn dev",
-    "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css paliari-vue.css --no-sourceMap --no-minimize --dist ./docs",
+    "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-suggestion.css --no-sourceMap --no-minimize --dist ./docs",
     "release": "rm -rf dist && yarn dist",
     "demo": "yarn dist && yarn dev && yarn demo:open",
     "demo:open": "open 'http://localhost:5000/'; serve ./docs/"
