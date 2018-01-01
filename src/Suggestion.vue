@@ -15,8 +15,8 @@
             @keydown.up="keyUp" 
             @keydown.down="keyDown">
     </div>
-    <div class="vue-suggestion-list" v-if="show">
-      <div class="vue-suggestion-list-item" v-for="item, i in internalItems" @click="onClickItem(item)"
+    <div class="vue-suggestion-list" v-if="showList">
+      <div class="vue-suggestion-list-item" v-for="item, i in items" @click="onClickItem(item)"
            :class="{'vue-suggestion-item-active': i === cursor}" @mouseover="cursor = i">
         <div :is="componentItem" :item="item" :searchText="searchText"></div>
       </div>
@@ -26,42 +26,30 @@
 
 <script>
 import Item from './Item.vue'
-import utils from './utils.js'
 
 export default {
   name: 'vue-sugesstion',
   props: {
     componentItem: { default: () => Item },
-    minLen: { type: Number, default: utils.minLen },
-    wait: { type: Number, default: utils.wait },
+    minLen: { type: Number, default: 2 },
+    wait: { type: Number, default: 0 },
     value: null,
-    getLabel: {
+    setLabel: {
       type: Function,
       default: item => item
     },
-    items: Array,
+    items: { type: Array, default: [] },
     autoSelectOneItem: { type: Boolean, default: true },
     placeholder: String,
     inputClass: { type: String, default: 'vue-suggestion-input' },
     disabled: { type: Boolean, default: false },
     inputAttrs: { type: Object, default: () => { return {} } },
-    keepOpen: { type: Boolean, default: false },
-    isAutocompleted: { type: Boolean, default: false }
   },
   data() {
     return {
       searchText: '',
       showList: false,
       cursor: -1,
-      internalItems: this.items || []
-    }
-  },
-  computed: {
-    hasItems() {
-      return !!this.internalItems.length;
-    },
-    show() {
-      return (this.showList && this.hasItems) || this.keepOpen;
     }
   },
   methods: {
@@ -70,6 +58,7 @@ export default {
       this.cursor = -1
       // this.onSelectItem(null, 'inputChange')
       // utils.callUpdateItems(this.searchText, this.updateItems)
+      this.updateItems();
       this.$emit('change', this.searchText)
     },
 
@@ -78,7 +67,10 @@ export default {
     },
 
     isAbleToShowList() {
-      return this.searchText && this.searchText.length >= 2;
+      return this.searchText &&
+        this.searchText.length >= this.minLen &&
+        this.items &&
+        this.items.length > 0;
     },
 
     focus() {
@@ -97,21 +89,17 @@ export default {
 
     onSelectItem(item) {
       if (item) {
-        this.internalItems = [item]
-        this.searchText = this.getLabel(item)
+        // this.internalItems = [item]
+        this.searchText = this.setLabel(item)
         this.$emit('item-selected', item)
       } else {
-        this.setItems(this.items)
+        // this.setItems(this.items)
       }
       this.$emit('input', item)
     },
 
-    setItems(items) {
-      this.internalItems = items || []
-    },
-
     isSelecteValue(value) {
-      return 1 == this.internalItems.length && value == this.internalItems[0]
+      return 1 == this.items.length && value == this.items[0]
     },
 
     keyUp() {
@@ -122,7 +110,7 @@ export default {
     },
 
     keyDown() {
-      if (this.cursor < this.internalItems.length) {
+      if (this.cursor < this.items.length) {
         this.cursor++
         this.itemView(this.$el.getElementsByClassName('vue-suggestion-list-item')[this.cursor])
       }
@@ -136,34 +124,19 @@ export default {
 
     keyEnter() {
       const index = this.cursor < 0 ? 0 : this.cursor;
-      if (this.showList && this.internalItems[index]) {
-        this.onSelectItem(this.internalItems[index])
+      if (this.showList && this.items[index]) {
+        this.onSelectItem(this.items[index])
         this.showList = false
       }
     },
 
   },
-  created() {
-    utils.minLen = this.minLen
-    utils.wait = this.wait
-    this.onSelectItem(this.value)
-  },
-  watch: {
-    items(newValue) {
-      this.setItems(newValue)
 
-      if (this.isAutocompleted) {
-        let item = utils.findItem(this.items, this.searchText, this.autoSelectOneItem)
-        if (item) {
-          this.onSelectItem(item)
-          this.showList = false
-        }
-      }
-    },
+  watch: {
     value(newValue) {
       if (!this.isSelecteValue(newValue)) {
         this.onSelectItem(newValue)
-        this.searchText = this.getLabel(newValue)
+        this.searchText = this.setLabel(newValue)
       }
     }
   }

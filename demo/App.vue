@@ -2,7 +2,14 @@
 div(style="text-align: center;")
   h2 Type some animal name to search
 
-  vue-suggestion(:items="items" v-model='item', :get-label='getLabel', :min-len='0' @update-items='update', :component-item='tpl', @item-selected="itemSelected", @item-clicked="itemClicked", :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}", :isAutocompleted="false")
+  vue-suggestion(:items="items" 
+                v-model='item', 
+                :set-label='setLabel',
+                @update-items='update', 
+                :component-item='tpl', 
+                @item-selected="itemSelected", 
+                @item-clicked="itemClicked", 
+                :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}")
   p Selected item:
   pre {{ item }}
 
@@ -37,7 +44,7 @@ export default {
     itemClicked(item) {
       console.log('You clicked an item!', item)
     },
-    getLabel(item) {
+    setLabel(item) {
       return item.name
     },
     update(text) {
