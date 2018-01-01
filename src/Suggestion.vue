@@ -1,13 +1,19 @@
 <template lang="html">
   <div class="vue-suggestion">
     <div class="vue-suggestion-input-group" :class="{'vue-suggestion-selected': value}">
-      <input type="search" v-model="searchText" v-bind="inputAttrs" 
+      <input type="search" 
+            v-model="searchText" 
+            v-bind="inputAttrs" 
             :class="inputAttrs.class || inputClass"
             :placeholder="inputAttrs.placeholder || placeholder"
             :disabled="inputAttrs.disabled || disabled"
-            @blur="blur" @focus="focus" @input="inputChange"
-            @keyup.enter="keyEnter" @keydown.tab="keyEnter" 
-            @keydown.up="keyUp" @keydown.down="keyDown">
+            @blur="blur" 
+            @focus="focus" 
+            @input="inputChange"
+            @keyup.enter="keyEnter" 
+            @keydown.tab="keyEnter" 
+            @keydown.up="keyUp" 
+            @keydown.down="keyDown">
     </div>
     <div class="vue-suggestion-list" v-if="show">
       <div class="vue-suggestion-list-item" v-for="item, i in internalItems" @click="onClickItem(item)"
@@ -40,7 +46,7 @@ export default {
     disabled: { type: Boolean, default: false },
     inputAttrs: { type: Object, default: () => { return {} } },
     keepOpen: { type: Boolean, default: false },
-    isAutocompleted: { type: Boolean, default: true } // in case some users dont need the autocomplete feature (like me)
+    isAutocompleted: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -60,10 +66,10 @@ export default {
   },
   methods: {
     inputChange() {
-      this.showList = this.searchText && this.searchText.length >= 2;
+      this.showList = this.isAbleToShowList();
       this.cursor = -1
-      this.onSelectItem(null, 'inputChange')
-      utils.callUpdateItems(this.searchText, this.updateItems)
+      // this.onSelectItem(null, 'inputChange')
+      // utils.callUpdateItems(this.searchText, this.updateItems)
       this.$emit('change', this.searchText)
     },
 
@@ -71,8 +77,12 @@ export default {
       this.$emit('update-items', this.searchText)
     },
 
+    isAbleToShowList() {
+      return this.searchText && this.searchText.length >= 2;
+    },
+
     focus() {
-      this.showList = true
+      this.showList = this.isAbleToShowList();
     },
 
     blur() {
@@ -104,14 +114,14 @@ export default {
       return 1 == this.internalItems.length && value == this.internalItems[0]
     },
 
-    keyUp(e) {
+    keyUp() {
       if (this.cursor > -1) {
         this.cursor--
         this.itemView(this.$el.getElementsByClassName('vue-suggestion-list-item')[this.cursor])
       }
     },
 
-    keyDown(e) {
+    keyDown() {
       if (this.cursor < this.internalItems.length) {
         this.cursor++
         this.itemView(this.$el.getElementsByClassName('vue-suggestion-list-item')[this.cursor])
@@ -124,9 +134,10 @@ export default {
       }
     },
 
-    keyEnter(e) {
-      if (this.showList && this.internalItems[this.cursor]) {
-        this.onSelectItem(this.internalItems[this.cursor])
+    keyEnter() {
+      const index = this.cursor < 0 ? 0 : this.cursor;
+      if (this.showList && this.internalItems[index]) {
+        this.onSelectItem(this.internalItems[index])
         this.showList = false
       }
     },
