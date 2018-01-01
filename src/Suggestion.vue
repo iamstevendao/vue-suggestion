@@ -1,12 +1,12 @@
 <template lang="html">
   <div class="vue-suggestion">
-    <div class="vue-suggestion-input-group" :class="{'vue-suggestion-selected': value}">
+    <div class="vue-suggestion-input-group" 
+        :class="{'vue-suggestion-selected': value}">
       <input type="search" 
             v-model="searchText" 
-            v-bind="inputAttrs" 
-            :class="inputAttrs.class || inputClass"
-            :placeholder="inputAttrs.placeholder || placeholder"
-            :disabled="inputAttrs.disabled || disabled"
+            class="vue-suggestion-input"
+            :placeholder="placeholder"
+            :disabled="disabled"
             @blur="blur" 
             @focus="focus" 
             @input="inputChange"
@@ -21,7 +21,7 @@
           @click="onSelectItem(item)"
           :class="{'vue-suggestion-item-active': i === cursor}" 
           @mouseover="cursor = i">
-        <div :is="componentItem" 
+        <div :is="template" 
             :item="item"></div>
       </div>
     </div>
@@ -29,24 +29,20 @@
 </template>
 
 <script>
-import Item from './Item.vue'
-
 export default {
   name: 'vue-sugesstion',
   props: {
-    componentItem: { default: () => Item },
+    template: {},
     minLen: { type: Number, default: 2 },
-    wait: { type: Number, default: 0 },
     value: null,
-    setLabel: {
-      type: Function,
-      default: item => item
-    },
+    setLabel: { type: Function, default: item => item },
     items: { type: Array, default: [] },
-    placeholder: String,
     inputClass: { type: String, default: 'vue-suggestion-input' },
     disabled: { type: Boolean, default: false },
-    inputAttrs: { type: Object, default: () => { return {} } },
+    placeholder: { type: String, default: '' },
+  },
+  created() {
+    this.checkMissingProps();
   },
   data() {
     return {
@@ -69,6 +65,12 @@ export default {
         this.items.length > 0;
     },
 
+    checkMissingProps() {
+      if (!this.template) {
+        console.warn("You need to pass `template` as the suggestion list item template");
+      }
+    },
+
     focus() {
       this.showList = this.isAbleToShowList();
     },
@@ -80,7 +82,7 @@ export default {
     onSelectItem(item) {
       if (item) {
         this.searchText = this.setLabel(item)
-        this.$emit('onSelected', item)
+        this.$emit('onItemSelected', item)
       }
       this.$emit('input', item);
     },
