@@ -1,0 +1,59 @@
+
+.vue-suggestion .vue-suggestion-input-group .vue-suggestion-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  color: #464a4c;
+  outline: none;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #cecece;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+}
+.vue-suggestion .vue-suggestion-input-group .vue-suggestion-input:focus {
+  border: 1px solid #023d7b;
+}
+.vue-suggestion .vue-suggestion-list {
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-top: none;
+  max-height: 400px;
+  overflow-y: auto;
+  border-bottom: 1px solid #023d7b;
+}
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
+  cursor: pointer;
+  background-color: #fff;
+  padding: 10px;
+  border-left: 1px solid #023d7b;
+  border-right: 1px solid #023d7b;
+}
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:last-child {
+  border-bottom: none;
+}
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:hover {
+  background-color: #eee;
+}
+
+.vue-suggestion {
+  position: relative;
+}
+.vue-suggestion .vue-suggestion-list {
+  position: absolute;
+}
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
+  cursor: pointer;
+}
+.vue-suggestion
+  .vue-suggestion-list
+  .vue-suggestion-list-item.vue-suggestion-item-active {
+  background-color: #f3f6fa;
+}
