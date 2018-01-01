@@ -82,6 +82,7 @@ export default {
         this.searchText = this.setLabel(item)
         this.$emit('onSelected', item)
       }
+      this.$emit('input', item);
     },
 
     keyUp() {
