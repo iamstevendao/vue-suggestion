@@ -33,7 +33,7 @@
   cursor: pointer;
   background-color: #fff;
   padding: 10px;
-  border-left: 1px solid #023d7b;
+  border-left: 10px solid #023d7b;
   border-right: 1px solid #023d7b;
 }
 .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:last-child {
