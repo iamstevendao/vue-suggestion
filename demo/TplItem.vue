@@ -1,8 +1,9 @@
 <template lang="pug">
 div
-  b \#{{item.id}}
-  span  {{ item.name }}
-  abbr {{item.description}}
+  b \#{{item.id}} 
+  span {{ item.name }}
+  br
+  span {{item.description}}
 </template>
 
 <script>
