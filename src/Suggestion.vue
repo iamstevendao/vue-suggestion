@@ -18,7 +18,7 @@
         v-if="showList">
       <div class="vue-suggestion-list-item" 
           v-for="item, i in items" 
-          @click="onSelectItem(item)"
+          @click="selectItem(item)" 
           :class="{'vue-suggestion-item-active': i === cursor}" 
           @mouseover="cursor = i">
         <div :is="itemTemplate" 
@@ -75,10 +75,11 @@ export default {
     },
 
     blur() {
-      this.showList = false;
+      // set timeout for the click event to work
+      setTimeout(() => this.showList = false, 200);
     },
 
-    onSelectItem(item) {
+    selectItem(item) {
       if (item) {
         this.searchText = this.setLabel(item)
         this.$emit('onItemSelected', item)
@@ -100,7 +101,7 @@ export default {
 
     keyEnter() {
       if (this.showList && this.items[this.cursor]) {
-        this.onSelectItem(this.items[this.cursor]);
+        this.selectItem(this.items[this.cursor]);
         this.showList = false;
       }
     },
