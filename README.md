@@ -50,25 +50,25 @@ Suggestion list input for Vue.js, inspired by [v-autocomplete](https://github.co
 Just overwrite their css classes:
 
 ```stylus
-.v-autocomplete
-  .v-autocomplete-input-group
-    .v-autocomplete-input
-  .v-autocomplete-list
-    .v-autocomplete-list-item
-      &.v-autocomplete-item-active
+.vue-suggestion
+  .vue-suggestion-input-group
+    .vue-suggestion-input
+  .vue-suggestion-list
+    .vue-suggestion-list-item
+      &.vue-suggestion-item-active
 ```
 
 ### Example
 
 ```html
 <template>
-  <v-autocomplete :items="items" 
+  <vue-suggestion :items="items" 
                   v-model="item", 
                   :setLabel="setLabel",
                   :template="itemTemplate", 
                   @onInputChange="inputChange", 
                   @onItemSelected="itemSelected">
-  </v-autocomplete>
+  </vue-suggestion>
 </template>
 
 <script>
