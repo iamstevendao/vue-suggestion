@@ -121,6 +121,8 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
 
 
 
@@ -435,7 +437,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"text-align":"center"}},[_vm._m(0),_c('span',{staticStyle:{"color":"grey"}},[_vm._v("made with ❤ by Steven.")]),_vm._m(1),_c('vue-suggestion',{attrs:{"items":_vm.items,"setLabel":_vm.setLabel,"template":_vm.itemTemplate},on:{"onInputChange":_vm.inputChange,"onItemSelected":_vm.itemSelected},model:{value:(_vm.item),callback:function ($$v) {_vm.item=$$v},expression:"item"}}),_c('p',[_vm._v("Selected item:")]),_c('code',[_vm._v(_vm._s(_vm.item))])],1)}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('b',{staticStyle:{"font-size":"25px"}},[_vm._v("Vue Suggestion ")]),_c('span',{staticStyle:{"font-size":"13px"}},[_vm._v("["),_c('a',{attrs:{"href":"https://github.com/iamstevendao/vue-suggestion"}},[_vm._v("github")]),_vm._v("]")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('span',[_vm._v("Press enter to select the first item in the suggestion list")])])}]
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('b',{staticStyle:{"font-size":"25px"}},[_vm._v("Vue Suggestion ")]),_c('span',{staticStyle:{"font-size":"13px"}},[_vm._v("["),_c('a',{attrs:{"href":"https://github.com/iamstevendao/vue-suggestion"}},[_vm._v("github")]),_vm._v(", "),_c('a',{attrs:{"href":"https://www.npmjs.com/package/vue-suggestion"}},[_vm._v("npm")]),_vm._v("]")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('span',[_vm._v("Press enter to select the first item in the suggestion list")])])}]
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 

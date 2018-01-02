@@ -4,6 +4,8 @@ div(style="text-align: center;")
     b(style="font-size: 25px;") Vue Suggestion 
     span(style="font-size: 13px;") [
       a(href="https://github.com/iamstevendao/vue-suggestion") github
+      |, 
+      a(href="https://www.npmjs.com/package/vue-suggestion") npm
       | ]
   span(style="color: grey;") made with &#x2764; by Steven.
   p: span Press enter to select the first item in the suggestion list

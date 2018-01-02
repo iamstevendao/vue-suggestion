@@ -10,10 +10,8 @@ Your search engine, your CSS, your everything...
 </p>
 
 ## Installation
-- yarn  
-   `yarn add vue-suggestion`
-- npm  
-   `npm i --save vue-suggestion`
+- **yarn**: `yarn add vue-suggestion`  
+- **npm**: `npm i --save vue-suggestion`
 
 ## Usage
 
@@ -40,7 +38,7 @@ Your search engine, your CSS, your everything...
 ```js
 [
   'template', // (required, vue component) template of suggestion list items, should be a Vue component
-  'setLabel', // (required, function) a function that returns the value of input after a suggestion is selected
+  'setLabel', // (required, function) a function that sets the value of input after a suggestion is selected
   'items', // (required, Array) suggestion array, should be updated dynamically after onInputChange()
   'minLen', // (default: 2, Integer) minimun number of characters inputted to search
   'disabled', // (default: false, Boolean) 
