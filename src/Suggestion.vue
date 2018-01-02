@@ -37,7 +37,6 @@ export default {
     value: null,
     setLabel: { type: Function, default: item => item },
     items: { type: Array, default: [] },
-    inputClass: { type: String, default: 'vue-suggestion-input' },
     disabled: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
   },

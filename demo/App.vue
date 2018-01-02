@@ -11,8 +11,8 @@ div(style="text-align: center;")
   vue-suggestion(:items="items" 
                 v-model='item', 
                 :setLabel='setLabel',
-                :template='tpl', 
-                @onInputChange='update', 
+                :template='itemTemplate', 
+                @onInputChange='inputChange', 
                 @onItemSelected="itemSelected")
 
   p Selected item:
@@ -22,7 +22,7 @@ div(style="text-align: center;")
 
 <script>
 import Suggestion from '../src/Suggestion.vue'
-import tpl from './TplItem.vue'
+import itemTemplate from './TplItem.vue'
 import Animals from './animals.js'
 export default {
   name: 'demo',
@@ -32,7 +32,7 @@ export default {
       itemsApi: [],
       item: {},
       items: [],
-      tpl: tpl
+      itemTemplate,
     }
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
     setLabel(item) {
       return item.name
     },
-    update(text) {
+    inputChange(text) {
       this.items = Animals.filter((item) => {
         return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
       })
