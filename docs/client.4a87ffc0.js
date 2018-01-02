@@ -389,6 +389,7 @@ var Component = normalizeComponent(
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
@@ -406,7 +407,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b',[_vm._v("#"+_vm._s(_vm.item.id))]),_c('span',[_vm._v(" "+_vm._s(_vm.item.name))]),_c('abbr',[_vm._v(_vm._s(_vm.item.description))])])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b',[_vm._v("#"+_vm._s(_vm.item.id)+" ")]),_c('span',[_vm._v(_vm._s(_vm.item.name))]),_c('br'),_c('span',[_vm._v(_vm._s(_vm.item.description))])])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
