@@ -1,7 +1,9 @@
 # vue-suggestion
 
 Suggestion list input for Vue.js, inspired by [v-autocomplete](https://github.com/paliari/v-autocomplete).  
-### Your search engine, your CSS, your everything...
+Your search engine, your CSS, your everything...
+
+### Checkout [demo](https://iamstevendao.github.io/vue-suggestion/).
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/ThirstyFearlessBunting-size_restricted.gif"/>
@@ -32,7 +34,7 @@ Suggestion list input for Vue.js, inspired by [v-autocomplete](https://github.co
     }
     </script>
     ```
-#### !!You can also use it as a custom field of [vue-form-generator]()
+#### !!You can also use it as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator).
 
 ### Props
 ```js
@@ -143,5 +145,8 @@ $ yarn/npm dist:demo
 $ yarn/npm dist
 
 ```
+
+## Credits
+- [v-autocomplete](https://github.com/paliari/v-autocomplete)
 
 made with &#x2764; by [Steven](https://github.com/iamstevendao).
