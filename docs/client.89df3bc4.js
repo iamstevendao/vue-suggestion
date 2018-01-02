@@ -281,16 +281,21 @@ var Component = normalizeComponent(
     },
     checkMissingProps: function checkMissingProps() {
       if (!this.itemTemplate) {
-        console.warn("You need to pass `template` as the suggestion list item template");
+        console.warn('You need to pass `template` as the suggestion list item template');
       }
     },
     focus: function focus() {
       this.showList = this.isAbleToShowList();
     },
     blur: function blur() {
-      this.showList = false;
+      var _this = this;
+
+      // set timeout for the click event to work
+      setTimeout(function () {
+        _this.showList = false;
+      }, 200);
     },
-    onSelectItem: function onSelectItem(item) {
+    selectItem: function selectItem(item) {
       if (item) {
         this.searchText = this.setLabel(item);
         this.$emit('onItemSelected', item);
@@ -299,17 +304,17 @@ var Component = normalizeComponent(
     },
     keyUp: function keyUp() {
       if (this.cursor > 0) {
-        this.cursor--;
+        this.cursor -= 1;
       }
     },
     keyDown: function keyDown() {
       if (this.cursor < this.items.length - 1) {
-        this.cursor++;
+        this.cursor += 1;
       }
     },
     keyEnter: function keyEnter() {
       if (this.showList && this.items[this.cursor]) {
-        this.onSelectItem(this.items[this.cursor]);
+        this.selectItem(this.items[this.cursor]);
         this.showList = false;
       }
     }
@@ -332,7 +337,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-suggestion"},[_c('div',{staticClass:"vue-suggestion-input-group",class:{'vue-suggestion-selected': _vm.value}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.searchText),expression:"searchText"}],staticClass:"vue-suggestion-input",attrs:{"type":"search","placeholder":_vm.placeholder,"disabled":_vm.disabled},domProps:{"value":(_vm.searchText)},on:{"blur":_vm.blur,"focus":_vm.focus,"input":[function($event){if($event.target.composing){ return; }_vm.searchText=$event.target.value},_vm.inputChange],"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }$event.preventDefault();_vm.keyEnter($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key)){ return null; }$event.preventDefault();_vm.keyUp($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key)){ return null; }$event.preventDefault();_vm.keyDown($event)}]}})]),_vm._v(" "),(_vm.showList)?_c('div',{staticClass:"vue-suggestion-list"},_vm._l((_vm.items),function(item, i){return _c('div',{staticClass:"vue-suggestion-list-item",class:{'vue-suggestion-item-active': i === _vm.cursor},on:{"click":function($event){_vm.onSelectItem(item)},"mouseover":function($event){_vm.cursor = i}}},[_c(_vm.itemTemplate,{tag:"div",attrs:{"item":item}})])})):_vm._e()])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-suggestion"},[_c('div',{staticClass:"vue-suggestion-input-group",class:{'vue-suggestion-selected': _vm.value}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.searchText),expression:"searchText"}],staticClass:"vue-suggestion-input",attrs:{"type":"search","placeholder":_vm.placeholder,"disabled":_vm.disabled},domProps:{"value":(_vm.searchText)},on:{"blur":_vm.blur,"focus":_vm.focus,"input":[function($event){if($event.target.composing){ return; }_vm.searchText=$event.target.value},_vm.inputChange],"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }$event.preventDefault();_vm.keyEnter($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key)){ return null; }$event.preventDefault();_vm.keyUp($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key)){ return null; }$event.preventDefault();_vm.keyDown($event)}]}})]),_vm._v(" "),(_vm.showList)?_c('div',{staticClass:"vue-suggestion-list"},_vm._l((_vm.items),function(item, i){return _c('div',{staticClass:"vue-suggestion-list-item",class:{'vue-suggestion-item-active': i === _vm.cursor},on:{"click":function($event){_vm.selectItem(item)},"mouseover":function($event){_vm.cursor = i}}},[_c(_vm.itemTemplate,{tag:"div",attrs:{"item":item}})])})):_vm._e()])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

@@ -48,13 +48,13 @@ export default {
       searchText: '',
       showList: false,
       cursor: 0,
-    }
+    };
   },
   methods: {
     inputChange() {
       this.showList = this.isAbleToShowList();
-      this.cursor = 0
-      this.$emit('onInputChange', this.searchText)
+      this.cursor = 0;
+      this.$emit('onInputChange', this.searchText);
     },
 
     isAbleToShowList() {
@@ -66,7 +66,7 @@ export default {
 
     checkMissingProps() {
       if (!this.itemTemplate) {
-        console.warn("You need to pass `template` as the suggestion list item template");
+        console.warn('You need to pass `template` as the suggestion list item template');
       }
     },
 
@@ -76,26 +76,26 @@ export default {
 
     blur() {
       // set timeout for the click event to work
-      setTimeout(() => this.showList = false, 200);
+      setTimeout(() => { this.showList = false; }, 200);
     },
 
     selectItem(item) {
       if (item) {
-        this.searchText = this.setLabel(item)
-        this.$emit('onItemSelected', item)
+        this.searchText = this.setLabel(item);
+        this.$emit('onItemSelected', item);
       }
       this.$emit('input', item);
     },
 
     keyUp() {
       if (this.cursor > 0) {
-        this.cursor--;
+        this.cursor -= 1;
       }
     },
 
     keyDown() {
       if (this.cursor < this.items.length - 1) {
-        this.cursor++;
+        this.cursor += 1;
       }
     },
 
@@ -111,9 +111,9 @@ export default {
   watch: {
     value(value) {
       this.searchText = this.setLabel(value);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
