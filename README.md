@@ -1,6 +1,11 @@
 # vue-suggestion
 
-Suggestion list input for Vue.js, inspired by [v-autocomplete](https://github.com/paliari/v-autocomplete).
+Suggestion list input for Vue.js, inspired by [v-autocomplete](https://github.com/paliari/v-autocomplete).  
+### Your search engine, your CSS, your everything...
+
+<p align="center">
+<img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/ThirstyFearlessBunting-size_restricted.gif"/>
+</p>
 
 ## Installation
 - yarn  
