@@ -14,7 +14,10 @@ Your search engine, your CSS, your everything...
 - **npm**: `npm i --save vue-suggestion`
 
 ## Usage
-
+- Import default `CSS` to your project:
+    ```js
+    import 'vue-suggestion/dist/vue-suggestion.css';
+    ```
 - Import `vue-suggestion` into your Vue component and use as a normal component:
     ```html
     <template>
@@ -32,12 +35,12 @@ Your search engine, your CSS, your everything...
     }
     </script>
     ```
-#### !!You can also use it as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator).
+#### !! You can also use it as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator).
 
 ### Props
 ```js
 [
-  'template', // (required, vue component) template of suggestion list items, should be a Vue component
+  'itemTemplate', // (required, vue component) template of suggestion list items, should be a Vue component
   'setLabel', // (required, function) a function that sets the value of input after a suggestion is selected
   'items', // (required, Array) suggestion array, should be updated dynamically after onInputChange()
   'minLen', // (default: 2, Integer) minimun number of characters inputted to search
@@ -70,7 +73,7 @@ Just overwrite their css classes:
   <vue-suggestion :items="items" 
                   v-model="item", 
                   :setLabel="setLabel",
-                  :template="itemTemplate", 
+                  :itemTemplate="itemTemplate", 
                   @onInputChange="inputChange", 
                   @onItemSelected="itemSelected">
   </vue-suggestion>

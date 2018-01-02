@@ -10,7 +10,7 @@
             @blur="blur" 
             @focus="focus" 
             @input="inputChange"
-            @keyup.enter.prevent="keyEnter" 
+            @keydown.enter.prevent="keyEnter" 
             @keydown.up.prevent="keyUp" 
             @keydown.down.prevent="keyDown">
     </div>
@@ -21,7 +21,7 @@
           @click="onSelectItem(item)"
           :class="{'vue-suggestion-item-active': i === cursor}" 
           @mouseover="cursor = i">
-        <div :is="template" 
+        <div :is="itemTemplate" 
             :item="item"></div>
       </div>
     </div>
@@ -30,9 +30,9 @@
 
 <script>
 export default {
-  name: 'vue-sugesstion',
+  name: 'vue-suggestion',
   props: {
-    template: {},
+    itemTemplate: {},
     minLen: { type: Number, default: 2 },
     value: null,
     setLabel: { type: Function, default: item => item },
@@ -65,7 +65,7 @@ export default {
     },
 
     checkMissingProps() {
-      if (!this.template) {
+      if (!this.itemTemplate) {
         console.warn("You need to pass `template` as the suggestion list item template");
       }
     },
@@ -92,7 +92,7 @@ export default {
       }
     },
 
-    keyDown(e) {
+    keyDown() {
       if (this.cursor < this.items.length - 1) {
         this.cursor++;
       }
@@ -108,8 +108,8 @@ export default {
   },
 
   watch: {
-    value(newValue) {
-      this.searchText = this.setLabel(newValue)
+    value(value) {
+      this.searchText = this.setLabel(value);
     }
   }
 }

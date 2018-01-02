@@ -13,7 +13,7 @@ div(style="text-align: center;")
   vue-suggestion(:items="items" 
                 v-model='item', 
                 :setLabel='setLabel',
-                :template='itemTemplate', 
+                :itemTemplate='itemTemplate', 
                 @onInputChange='inputChange', 
                 @onItemSelected="itemSelected")
 
@@ -24,7 +24,7 @@ div(style="text-align: center;")
 
 <script>
 import Suggestion from '../src/Suggestion.vue'
-import itemTemplate from './TplItem.vue'
+import itemTemplate from './item-template.vue'
 import Animals from './animals.js'
 export default {
   name: 'demo',
