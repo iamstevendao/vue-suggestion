@@ -1,6 +1,6 @@
 {
   "name": "vue-suggestion",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Suggestion list input for Vue.js",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "main": "dist/vue-suggestion.js",
@@ -33,7 +33,6 @@
     "stylus-loader": "^3.0.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.3.0",
-    "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-import": "^2.7.0",
     "babel-eslint": "^7.2.3"
   }
