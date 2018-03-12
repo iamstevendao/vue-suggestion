@@ -43,6 +43,11 @@ export default {
   created() {
     this.checkMissingProps();
   },
+  mounted() {
+    if (this.value) {
+      this.searchText = this.setLabel(this.value);
+    }
+  },
   data() {
     return {
       searchText: '',
@@ -109,8 +114,14 @@ export default {
   },
 
   watch: {
-    value(value) {
-      this.searchText = this.setLabel(value);
+    value: {
+      handler(value) {
+        if (!value) {
+          return;
+        }
+        this.searchText = this.setLabel(value);
+      },
+      deep: true,
     },
   },
 };
