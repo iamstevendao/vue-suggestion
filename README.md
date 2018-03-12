@@ -80,7 +80,7 @@ Just overwrite their css classes:
 </template>
 
 <script>
-import itemTemplate from './ItemTemplate.vue';
+import itemTemplate from './item-template.vue';
 export default {
   data () {
     return {
@@ -94,6 +94,9 @@ export default {
     }
   },
   methods: {
+    itemSelected (item) {
+      this.item = item;
+    },
     setLabel (item) {
       return item.name;
     },
