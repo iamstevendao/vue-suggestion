@@ -56,7 +56,8 @@ export default {
 <style>
 .vue-suggestion .vue-suggestion-input-group .vue-suggestion-input {
   display: block;
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   padding: 0.5rem 0.7rem;
   font-size: 0.9rem;
   line-height: 1.25;
