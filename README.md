@@ -18,7 +18,7 @@ Your search engine, your CSS, your everything...
     ```js
     import 'vue-suggestion/dist/vue-suggestion.css';
     ```
-- Import `vue-suggestion` into your Vue component and use as a normal component:
+- Import `vue-suggestion` into your Vue component and use it as normal:
     ```html
     <template>
     ...
@@ -38,21 +38,23 @@ Your search engine, your CSS, your everything...
 #### !! You can also use it as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator).
 
 ### Props
-```js
-[
-  'itemTemplate', // (required, vue component) template of suggestion list items, should be a Vue component
-  'setLabel', // (required, function) a function that sets the value of input after a suggestion is selected
-  'items', // (required, Array) suggestion array, should be updated dynamically after onInputChange()
-  'minLen', // (default: 2, Integer) minimun number of characters inputted to search
-  'disabled', // (default: false, Boolean) 
-  'placeholder' // (default: '', String)
-]
-```
+
+  | Property value | Type | Default value | Description |
+  | -------------- | ---- | ------------- | ----------- |
+  | itemTemplate | vue component |  | Template for item in suggestion list |
+  | setLabel | function |  | Value of choosen input, be shown in the input |
+  | items | Array | `[]` | Suggestion array, should be updated dynamically after `onInputChange()` |
+  | minLen | Interger | `2` | Minimun number of characters inputted to start searching |
+  | disabled | Boolean | `false` | Disable the input |
+  | placeholder | String | `''` | Placeholder of the input |
+
 ### Events
-```
-@onInputChange(String) // fires when the input changes with the argument is the current input text.
-@onItemSelected(Object) // fires when user selects a suggestion
-```
+
+  | Property value | Arguments | Description |
+  | -------------- | --------- | ----------- |
+  | onInputChange | String | Fires when the input changes with the argument is the current input text. |
+  | onItemSelected | Object | Fires when user selects a suggestion |
+
 ### Style
 
 Just overwrite their css classes:
