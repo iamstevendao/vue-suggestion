@@ -1,6 +1,6 @@
 {
   "name": "vue-suggestion",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Suggestion list input for Vue.js",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "main": "dist/vue-suggestion.js",
@@ -26,14 +26,14 @@
     "v-suggestion"
   ],
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.3.0",
+    "eslint-plugin-import": "^2.7.0",
     "poi": "^9.4.3",
     "pug": "^2.0.0-rc.4",
     "serve": "^6.3.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.3.0",
-    "eslint-plugin-import": "^2.7.0",
-    "babel-eslint": "^7.2.3"
+    "stylus-loader": "^3.0.1"
   }
 }
