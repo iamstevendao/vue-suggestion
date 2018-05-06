@@ -13,7 +13,8 @@
     "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-suggestion.css --no-sourceMap --no-minimize --dist ./docs",
     "release": "rm -rf dist && yarn dist",
     "demo": "yarn dist && yarn dev && yarn demo:open",
-    "demo:open": "open 'http://localhost:5000/'; serve ./docs/"
+    "demo:open": "open 'http://localhost:5000/'; serve ./docs/",
+    "test": "jest"
   },
   "files": [
     "dist/"
@@ -26,14 +27,31 @@
     "v-suggestion"
   ],
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.15",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^22.4.3",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.3.0",
     "eslint-plugin-import": "^2.7.0",
+    "jest": "^22.4.3",
     "poi": "^9.4.3",
     "pug": "^2.0.0-rc.4",
     "serve": "^6.3.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
+    "stylus-loader": "^3.0.1",
+    "vue-jest": "^2.5.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "moduleNameMapper": {
+      "^[/](.*)$": "<rootDir>/$1"
+    },
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    }
   }
 }
