@@ -13,6 +13,7 @@
             @keydown.enter.prevent="keyEnter" 
             @keydown.up.prevent="keyUp" 
             @keydown.down.prevent="keyDown">
+      <slot name="searchSlot"></slot>
     </div>
     <div class="vue-suggestion-list" 
         v-if="showList">
