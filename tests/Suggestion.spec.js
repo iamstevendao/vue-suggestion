@@ -1,5 +1,6 @@
 import { shallow } from '@vue/test-utils'
 import animals from '/demo/animals';
+import itemTemplate from '/demo/item-template.vue';
 import Suggestion from '/src/Suggestion.vue'
 
 describe('Suggestion.vue', () => {
@@ -16,18 +17,33 @@ describe('Suggestion.vue', () => {
     expect(wrapper.vm.cursor).toBe(0);
   });
   it('shows the suggestion list when value is inputted and there are items passed', () => {
-    const items = [];
-    function setLabel(item) {
-      return item.name;
-    }
     const wrapper = shallow(Suggestion, {
       propsData: {
         items: animals,
-        setLabel,
-        itemTemplate: '<span>Hello</span>',
+        itemTemplate,
         value: 'abcd',
       }
     });
     expect(wrapper.vm.isAbleToShowList).toBeTruthy();
+  });
+  it('shows and hides the suggestions when input text and press enter', () => {
+    const wrapper = shallow(Suggestion, {
+      propsData: {
+        items: animals,
+        itemTemplate: '<div>hello</div>',
+        value: 'abcd',
+      }
+    });
+
+    const input = wrapper.find('.vue-suggestion-input');
+    expect(input.is('input')).toBe(true);
+
+    input.element.value = 'abcde';
+    input.trigger('input');
+    expect(wrapper.vm.searchText).toBe('abcde');
+
+    // input.trigger('keydown.enter');
+    // // expect(wrapper.vm.searchText).toBe(animals[0]);
+    // expect(wrapper.vm.showList).toBe(false);
   })
 })
