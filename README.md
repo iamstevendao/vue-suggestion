@@ -55,6 +55,12 @@ Your search engine, your CSS, your everything...
   | onInputChange | String | Fires when the input changes with the argument is the current input text. |
   | onItemSelected | Object | Fires when user selects a suggestion |
 
+### Slots
+
+  | Name | Description |
+  | ---- | ----------- |
+  | searchSlot | Next to the input, for the custom search icon or button... |
+
 ### Style
 
 Just overwrite their css classes:
