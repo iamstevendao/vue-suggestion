@@ -110,6 +110,7 @@ export default {
         this.selectItem(this.items[this.cursor]);
         this.showList = false;
       }
+      this.$emit('onEnter', this.items[this.cursor]);
     },
 
   },

@@ -1,5 +1,5 @@
 import Suggestion from './Suggestion.vue';
-// Suggestion.version = proccess.env.VERSION
+// Suggestion.version = process.env.VERSION
 
 export default {
   ...Suggestion,
