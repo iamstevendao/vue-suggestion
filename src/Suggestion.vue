@@ -5,6 +5,7 @@
       <input type="search" 
             v-model="searchText" 
             class="vue-suggestion-input"
+            :class="inputClasses"
             :placeholder="placeholder"
             :disabled="disabled"
             @blur="blur" 
@@ -16,7 +17,7 @@
       <slot name="searchSlot"></slot>
     </div>
     <div class="vue-suggestion-list" 
-        v-if="showList">
+         v-if="showList">
       <div class="vue-suggestion-list-item" 
           v-for="item, i in items" 
           @click="selectItem(item)" 
@@ -40,6 +41,7 @@ export default {
     items: { type: Array, default: [] },
     disabled: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
+    inputClasses: { type: String, default: '' },
   },
   created() {
     this.checkMissingProps();
@@ -64,10 +66,12 @@ export default {
     },
 
     isAbleToShowList() {
-      return this.searchText &&
+      return (
+        this.searchText &&
         this.searchText.length >= this.minLen &&
         this.items &&
-        this.items.length > 0;
+        this.items.length > 0
+      );
     },
 
     checkMissingProps() {
@@ -82,7 +86,9 @@ export default {
 
     blur() {
       // set timeout for the click event to work
-      setTimeout(() => { this.showList = false; }, 200);
+      setTimeout(() => {
+        this.showList = false;
+      }, 200);
     },
 
     selectItem(item) {
@@ -112,7 +118,6 @@ export default {
       }
       this.$emit('onEnter', this.items[this.cursor]);
     },
-
   },
 
   watch: {
@@ -139,9 +144,7 @@ export default {
 .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
   cursor: pointer;
 }
-.vue-suggestion
-  .vue-suggestion-list
-  .vue-suggestion-list-item.vue-suggestion-item-active {
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item.vue-suggestion-item-active {
   background-color: #f3f6fa;
 }
 </style>
