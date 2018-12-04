@@ -1,30 +1,36 @@
 <template lang="html">
   <div class="vue-suggestion">
-    <div class="vue-suggestion-input-group" 
-        :class="{'vue-suggestion-selected': value}">
-      <input type="search" 
-            v-model="searchText" 
-            class="vue-suggestion-input"
-            :class="inputClasses"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            @blur="blur" 
-            @focus="focus" 
-            @input="inputChange"
-            @keydown.enter.prevent="keyEnter" 
-            @keydown.up.prevent="keyUp" 
-            @keydown.down.prevent="keyDown">
-      <slot name="searchSlot"></slot>
+    <div
+      :class="{'vue-suggestion-selected': value}"
+      class="vue-suggestion-input-group">
+      <input
+        v-model="searchText"
+        :class="inputClasses"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        type="search"
+        class="vue-suggestion-input"
+        @blur="blur"
+        @focus="focus"
+        @input="inputChange"
+        @keydown.enter.prevent="keyEnter"
+        @keydown.up.prevent="keyUp"
+        @keydown.down.prevent="keyDown">
+      <slot name="searchSlot"/>
     </div>
-    <div class="vue-suggestion-list" 
-         v-if="showList">
-      <div class="vue-suggestion-list-item" 
-          v-for="item, i in items" 
-          @click="selectItem(item)" 
-          :class="{'vue-suggestion-item-active': i === cursor}" 
-          @mouseover="cursor = i">
-        <div :is="itemTemplate" 
-            :item="item"></div>
+    <div
+      v-if="showList"
+      class="vue-suggestion-list">
+      <div
+        v-for="(item, i) in items"
+        :key="i"
+        :class="{'vue-suggestion-item-active': i === cursor}"
+        class="vue-suggestion-list-item"
+        @click="selectItem(item)"
+        @mouseover="cursor = i">
+        <div
+          :is="itemTemplate"
+          :item="item"/>
       </div>
     </div>
   </div>
@@ -32,16 +38,40 @@
 
 <script>
 export default {
-  name: 'vue-suggestion',
+  name: 'VueSuggestion',
   props: {
-    itemTemplate: {},
+    itemTemplate: {
+      type: Object,
+      required: true,
+    },
     minLen: { type: Number, default: 2 },
-    value: null,
+    value: {
+      type: [Object, String, Number],
+      default: null,
+    },
     setLabel: { type: Function, default: item => item },
-    items: { type: Array, default: [] },
+    items: { type: Array, default: () => [] },
     disabled: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
     inputClasses: { type: String, default: '' },
+  },
+  data() {
+    return {
+      searchText: '',
+      showList: false,
+      cursor: 0,
+    };
+  },
+  watch: {
+    value: {
+      handler(value) {
+        if (!value) {
+          return;
+        }
+        this.searchText = this.setLabel(value);
+      },
+      deep: true,
+    },
   },
   created() {
     this.checkMissingProps();
@@ -50,13 +80,6 @@ export default {
     if (this.value) {
       this.searchText = this.setLabel(this.value);
     }
-  },
-  data() {
-    return {
-      searchText: '',
-      showList: false,
-      cursor: 0,
-    };
   },
   methods: {
     inputChange() {
@@ -67,10 +90,10 @@ export default {
 
     isAbleToShowList() {
       return (
-        this.searchText &&
-        this.searchText.length >= this.minLen &&
-        this.items &&
-        this.items.length > 0
+        this.searchText
+        && this.searchText.length >= this.minLen
+        && this.items
+        && this.items.length > 0
       );
     },
 
@@ -119,18 +142,6 @@ export default {
       this.$emit('onEnter', this.items[this.cursor]);
     },
   },
-
-  watch: {
-    value: {
-      handler(value) {
-        if (!value) {
-          return;
-        }
-        this.searchText = this.setLabel(value);
-      },
-      deep: true,
-    },
-  },
 };
 </script>
 
@@ -144,7 +155,9 @@ export default {
 .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
   cursor: pointer;
 }
-.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item.vue-suggestion-item-active {
+.vue-suggestion
+  .vue-suggestion-list
+  .vue-suggestion-list-item.vue-suggestion-item-active {
   background-color: #f3f6fa;
 }
 </style>
