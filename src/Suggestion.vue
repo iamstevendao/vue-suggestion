@@ -72,6 +72,11 @@ export default {
       },
       deep: true,
     },
+    'items.length': function () {
+      // Items might be changed from Promise after searching
+      // So we need the check if we should show the suggestion list
+      this.showList = this.isAbleToShowList();
+    },
   },
   created() {
     this.checkMissingProps();
@@ -96,24 +101,20 @@ export default {
         && this.items.length > 0
       );
     },
-
     checkMissingProps() {
       if (!this.itemTemplate) {
         console.warn('You need to pass `template` as the suggestion list item template');
       }
     },
-
     focus() {
       this.showList = this.isAbleToShowList();
     },
-
     blur() {
       // set timeout for the click event to work
       setTimeout(() => {
         this.showList = false;
       }, 200);
     },
-
     selectItem(item) {
       if (item) {
         this.searchText = this.setLabel(item);
@@ -121,19 +122,16 @@ export default {
       }
       this.$emit('input', item);
     },
-
     keyUp() {
       if (this.cursor > 0) {
         this.cursor -= 1;
       }
     },
-
     keyDown() {
       if (this.cursor < this.items.length - 1) {
         this.cursor += 1;
       }
     },
-
     keyEnter() {
       if (this.showList && this.items[this.cursor]) {
         this.selectItem(this.items[this.cursor]);
