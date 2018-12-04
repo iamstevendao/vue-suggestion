@@ -1,6 +1,6 @@
 {
   "name": "vue-suggestion",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Suggestion list input for Vue.js",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "main": "dist/vue-suggestion.js",
