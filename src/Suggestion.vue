@@ -107,9 +107,11 @@ export default {
       }
     },
     focus() {
+      this.$emit('focus');
       this.showList = this.isAbleToShowList();
     },
     blur() {
+      this.$emit('blur');
       // set timeout for the click event to work
       setTimeout(() => {
         this.showList = false;
@@ -123,11 +125,13 @@ export default {
       this.$emit('input', item);
     },
     keyUp() {
+      this.$emit('keyUp');
       if (this.cursor > 0) {
         this.cursor -= 1;
       }
     },
     keyDown() {
+      this.$emit('keyDown');
       if (this.cursor < this.items.length - 1) {
         this.cursor += 1;
       }
@@ -153,9 +157,7 @@ export default {
 .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
   cursor: pointer;
 }
-.vue-suggestion
-  .vue-suggestion-list
-  .vue-suggestion-list-item.vue-suggestion-item-active {
+.vue-suggestion .vue-suggestion-list .vue-suggestion-list-item.vue-suggestion-item-active {
   background-color: #f3f6fa;
 }
 </style>
