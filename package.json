@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": "https://github.com/iamstevendao/vue-suggestion",
   "scripts": {
-    "dist": "poi build ./src/vue-suggestion.js --format umd --module-name VueSuggestion --filename.js vue-suggestion.js --filename.css vue-suggestion.css --no-sourceMap --no-html",
+    "dist": "poi build",
     "dist:demo": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-suggestion.css --no-sourceMap --dist ./docs",
     "start": "yarn dev",
     "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-suggestion.css --no-sourceMap --no-minimize --dist ./docs",
