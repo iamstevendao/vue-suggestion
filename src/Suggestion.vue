@@ -1,7 +1,9 @@
 <template lang="html">
-  <div class="vue-suggestion">
+  <div
+    :class="wrapperClasses"
+    class="vue-suggestion">
     <div
-      :class="{'vue-suggestion-selected': value}"
+      :class="[{ 'vue-suggestion-selected': value }, inputWrapperClasses]"
       class="vue-suggestion-input-group">
       <input
         v-model="searchText"
@@ -18,21 +20,35 @@
         @keydown.down.prevent="keyDown">
       <slot name="searchSlot"/>
     </div>
-    <div
+    <slot
       v-if="showList"
+      :class="suggestionListClasses"
+      name="suggestionList"
       class="vue-suggestion-list">
       <div
-        v-for="(item, i) in items"
-        :key="i"
-        :class="{'vue-suggestion-item-active': i === cursor}"
-        class="vue-suggestion-list-item"
-        @click="selectItem(item)"
-        @mouseover="cursor = i">
+        v-for="group in itemGroups"
+        :class="suggestionGroupClasses"
+        :key="group.header">
         <div
-          :is="itemTemplate"
-          :item="item"/>
+          v-if="itemGroups.length > 1 || group.header"
+          :class="suggestionGroupHeaderClasses"
+          class="vue-suggestion-group-header">
+          {{ group.header }}
+        </div>
+        <div
+          v-for="(item, i) in group.items"
+          :key="i"
+          :class="[{ 'vue-suggestion-item-active': i === cursor }, suggestionItemWrapperClasses]"
+          class="vue-suggestion-list-item"
+          @click="selectItem(item)"
+          @mouseover="cursor = i">
+          <div
+            :class="suggestionItemClasses"
+            :is="itemTemplate"
+            :item="item"/>
+        </div>
       </div>
-    </div>
+    </slot>
   </div>
 </template>
 
@@ -54,6 +70,13 @@ export default {
     disabled: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
     inputClasses: { type: String, default: '' },
+    wrapperClasses: { type: String, default: '' },
+    inputWrapperClasses: { type: String, default: '' },
+    suggestionListClasses: { type: String, default: '' },
+    suggestionGroupClasses: { type: String, default: '' },
+    suggestionGroupHeaderClasses: { type: String, default: '' },
+    suggestionItemWrapperClasses: { type: String, default: '' },
+    suggestionItemClasses: { type: String, default: '' },
   },
   data() {
     return {
@@ -61,6 +84,22 @@ export default {
       showList: false,
       cursor: 0,
     };
+  },
+  computed: {
+    itemGroups() {
+      return this.items.reduce((prv, crr) => {
+        const foundGroup = prv.find(gr => gr.header === crr.suggestionGroup);
+        if (foundGroup) {
+          foundGroup.items.push(crr);
+        } else {
+          prv.push({
+            header: crr.suggestionGroup || '',
+            items: [crr],
+          });
+        }
+        return prv;
+      }, []);
+    },
   },
   watch: {
     value: {
@@ -92,14 +131,8 @@ export default {
       this.cursor = 0;
       this.$emit('onInputChange', this.searchText);
     },
-
     isAbleToShowList() {
-      return (
-        this.searchText
-        && this.searchText.length >= this.minLen
-        && this.items
-        && this.items.length > 0
-      );
+      return (this.searchText || '').length >= this.minLen && this.items.length > 0;
     },
     checkMissingProps() {
       if (!this.itemTemplate) {
@@ -107,11 +140,11 @@ export default {
       }
     },
     focus() {
-      this.$emit('focus');
+      this.$emit('focus', this.searchText);
       this.showList = this.isAbleToShowList();
     },
     blur() {
-      this.$emit('blur');
+      this.$emit('blur', this.searchText);
       // set timeout for the click event to work
       setTimeout(() => {
         this.showList = false;
@@ -125,13 +158,13 @@ export default {
       this.$emit('input', item);
     },
     keyUp() {
-      this.$emit('keyUp');
+      this.$emit('keyUp', this.searchText);
       if (this.cursor > 0) {
         this.cursor -= 1;
       }
     },
     keyDown() {
-      this.$emit('keyDown');
+      this.$emit('keyDown', this.searchText);
       if (this.cursor < this.items.length - 1) {
         this.cursor += 1;
       }
