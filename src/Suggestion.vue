@@ -20,8 +20,13 @@
         @keydown.down.prevent="keyDown">
       <slot name="searchSlot"/>
     </div>
+    <slot v-if="loading"
+          name="loading"
+          class="vue-suggestion-loading">
+      Loading...
+    </slot>
     <slot
-      v-if="showList"
+      v-else-if="showList"
       :class="suggestionListClasses"
       name="suggestionList"
       class="vue-suggestion-list">
@@ -68,6 +73,7 @@ export default {
     setLabel: { type: Function, default: item => item },
     items: { type: Array, default: () => [] },
     disabled: { type: Boolean, default: false },
+    loading: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
     inputClasses: { type: String, default: '' },
     wrapperClasses: { type: String, default: '' },
