@@ -1,7 +1,6 @@
-<template lang="html">
+<template>
   <div :class="[wrapperClasses, 'vue-suggestion']">
-    <div
-      :class="[{ 'vs__selected': value }, inputWrapperClasses, 'vs__input-group']">
+    <div :class="[{ vs__selected: value }, inputWrapperClasses, 'vs__input-group']">
       <input
         v-model="searchText"
         type="search"
@@ -13,38 +12,36 @@
         @input="inputChange"
         @keydown.enter.prevent="keyEnter"
         @keydown.up.prevent="keyUp"
-        @keydown.down.prevent="keyDown">
-      <slot name="searchSlot"/>
+        @keydown.down.prevent="keyDown"
+      />
+      <slot name="searchSlot" />
     </div>
-    <slot v-if="loading"
-          name="loading">
+    <slot v-if="loading" name="loading">
       <div class="vs__loading">Loading...</div>
     </slot>
-    <slot
-      v-else-if="showList"
-      name="suggestionList">
+    <slot v-else-if="showList" name="suggestionList">
       <div :class="[suggestionListClasses, 'vs__list']">
-      <div
-        v-for="(group, index) in itemGroups"
-        :class="suggestionGroupClasses"
-        :key="index">
-        <div
-          v-if="itemGroups.length > 1 || group.header"
-          :class="[suggestionGroupHeaderClasses, 'vs__group-header']">
-          {{ group.header }}
-        </div>
-        <div
-          v-for="item in group.items"
-          :key="item.vsItemIndex"
-          :class="[{ 'vs__item-active': item.vsItemIndex === cursor }, suggestionItemWrapperClasses, 'vs__list-item']"
-          @click="selectItem(item)"
-          @mouseover="cursor = item.vsItemIndex">
+        <div v-for="(group, index) in itemGroups" :class="suggestionGroupClasses" :key="index">
           <div
-            :class="suggestionItemClasses"
-            :is="itemTemplate"
-            :item="item"/>
+            v-if="itemGroups.length > 1 || group.header"
+            :class="[suggestionGroupHeaderClasses, 'vs__group-header']"
+          >
+            {{ group.header }}
+          </div>
+          <div
+            v-for="item in group.items"
+            :key="item.vsItemIndex"
+            :class="[
+              { 'vs__item-active': item.vsItemIndex === cursor },
+              suggestionItemWrapperClasses,
+              'vs__list-item',
+            ]"
+            @click="selectItem(item)"
+            @mouseover="cursor = item.vsItemIndex"
+          >
+            <div :class="suggestionItemClasses" :is="itemTemplate" :item="item" />
+          </div>
         </div>
-      </div>
       </div>
     </slot>
   </div>
