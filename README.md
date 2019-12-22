@@ -9,8 +9,8 @@ Suggestion list input for Vue.js
 **Useful Links**
 
 - [Live Demo](https://iamstevendao.github.io/vue-suggestion/)
-- [Changelog](https://github.com/EducationLink/vue-suggestion/releases)
-- [Documentation for `v0.x.x`](https://github.com/EducationLink/vue-suggestion/blob/master/README-v0.md)
+- [Changelog](https://github.com/iamstevendao/vue-suggestion/releases)
+- [Documentation for `v0.x.x`](https://github.com/iamstevendao/vue-suggestion/blob/master/README-v0.md)
 
 **Table of Contents**
 
