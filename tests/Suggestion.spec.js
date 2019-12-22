@@ -1,17 +1,17 @@
-import { shallow } from '@vue/test-utils'
+import { shallow } from '@vue/test-utils';
 import animals from '/demo/animals';
 import itemTemplate from '/demo/item-template.vue';
-import Suggestion from '/src/Suggestion.vue'
+import Suggestion from '/src/Suggestion.vue';
 
 describe('Suggestion.vue', () => {
   it('generates data properly when passing minimum data', () => {
-    const items = ['']
+    const items = [''];
     const wrapper = shallow(Suggestion, {
       propsData: {
         items,
         itemTemplate: '<span>Hello</span>',
-      }
-    })
+      },
+    });
     expect(wrapper.vm.searchText).toBe('');
     expect(wrapper.vm.isShowList).toBeFalsy();
     expect(wrapper.vm.cursor).toBe(0);
@@ -22,7 +22,7 @@ describe('Suggestion.vue', () => {
         items: animals,
         itemTemplate,
         value: 'abcd',
-      }
+      },
     });
     expect(wrapper.vm.isAbleToShowList).toBeTruthy();
   });
@@ -32,7 +32,7 @@ describe('Suggestion.vue', () => {
         items: animals,
         itemTemplate: '<div>hello</div>',
         value: 'abcd',
-      }
+      },
     });
 
     const input = wrapper.find('.vue-suggestion-input');
@@ -45,5 +45,5 @@ describe('Suggestion.vue', () => {
     // input.trigger('keydown.enter');
     // // expect(wrapper.vm.searchText).toBe(animals[0]);
     // expect(wrapper.vm.showList).toBe(false);
-  })
-})
+  });
+});
