@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center;">
+  <div style="text-align: center; width: 100%;">
     <span style="color: grey;">made with &#x2764; by Steven.</span>
     <p><span>Press enter to select the first item in the suggestion list</span></p>
     <vue-suggestion
@@ -7,7 +7,7 @@
       :items="items"
       :setLabel="setLabel"
       :itemTemplate="itemTemplate"
-      @onInputChange="inputChange"
+      @changed="inputChange"
     ></vue-suggestion>
     <template v-if="item && item.id">
       <p>Selected item:</p>
@@ -25,7 +25,7 @@
 
 <script>
 import itemTemplate from './demo/item-template.vue';
-import Animals from './demo/animals';
+import animals from './demo/animals';
 
 export default {
   name: 'demo',
@@ -43,7 +43,7 @@ export default {
       return item.name;
     },
     inputChange(text) {
-      this.items = Animals
+      this.items = animals
         .filter(item => (new RegExp(text.toLowerCase())).test(item.name.toLowerCase()));
     },
   },
@@ -51,9 +51,14 @@ export default {
 </script>
 
 <style>
-.vue-suggestion .vs__input-group .vs__input {
-  display: block;
+.vue-suggestion {
   width: 50%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.vue-suggestion .vs__input-group .vs__input {
+  width: 100%;
+  display: block;
   margin: 0 auto;
   padding: 0.5rem 0.7rem;
   font-size: 0.9rem;
