@@ -47,10 +47,10 @@ Suggestion list input for Vue.js
   ```html
   <template>
     <vue-suggestion :items="items" 
-                    v-model="item", 
-                    :setLabel="setLabel",
-                    :itemTemplate="itemTemplate", 
-                    @changed="inputChange", 
+                    v-model="item" 
+                    :setLabel="setLabel"
+                    :itemTemplate="itemTemplate"
+                    @changed="inputChange" 
                     @selected="itemSelected">
     </vue-suggestion>
   </template>
@@ -128,6 +128,43 @@ Or use the component directly:
 <template>
   <vue-suggestion v-model="value"></vue-suggestion>
 </template>
+
+<!-- some-sample-css-as-example-for-your-dropdown-autocomplete  -->
+<style scope>
+.vue-suggestion .vs__list {
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-top: none;
+    max-height: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid #023d7b;
+    position: relative;
+}
+.vue-suggestion .vs__list .vs__list-item {
+    background-color: #fff;
+    padding: 10px;
+    border-left: 1px solid #023d7b;
+    border-right: 1px solid #023d7b;
+}
+.vue-suggestion .vs__list .vs__list-item:last-child {
+    border-bottom: none;
+}
+.vue-suggestion .vs__list .vs__list-item:hover {
+    background-color: #eee !important;
+}
+.vue-suggestion .vs__list,
+.vue-suggestion .vs__loading {
+    position: absolute;
+}
+.vue-suggestion .vs__list .vs__list-item {
+    cursor: pointer;
+}
+.vue-suggestion .vs__list .vs__list-item.vs__item-active {
+    background-color: #f3f6fa;
+}
+</style>
+
 <script>
 import { VueSuggestion } from 'vue-suggestion';
 
@@ -168,6 +205,7 @@ Vue.component('vue-suggestion', VueSuggestion.VueSuggestion)
   | Property | Type | Default value | Description |
   | -------------- | ---- | ------------- | ----------- |
   | `itemTemplate` | Vue component |  | Template for item in suggestion list |
+  | `inputClasses` | `string` |  | Custom classes. eg: 'form-control, is-valid'.    |
   | `setLabel` | `function` |  | Value of chosen input, be shown in the input |
   | `items` | `Array` | `[]` | Suggestion array, should be updated dynamically after `onInputChange()` |
   | `minLen` | `Number` | `2` | Minimum number of characters inputted to start searching |
