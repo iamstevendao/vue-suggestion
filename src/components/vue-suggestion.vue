@@ -7,13 +7,13 @@
         :class="[inputClasses, 'vs__input']"
         :placeholder="placeholder"
         :disabled="disabled"
+        :maxlength="maxLen"
         @blur="blur"
         @focus="focus"
         @input="inputChange"
         @keydown.enter.prevent="keyEnter"
         @keydown.up.prevent="keyUp"
         @keydown.down.prevent="keyDown"
-        :maxlength="maxLen"
       />
       <slot name="searchSlot" />
     </div>
