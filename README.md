@@ -209,6 +209,7 @@ Vue.component('vue-suggestion', VueSuggestion.VueSuggestion)
   | `setLabel` | `function` |  | Value of chosen input, be shown in the input |
   | `items` | `Array` | `[]` | Suggestion array, should be updated dynamically after `onInputChange()` |
   | `minLen` | `Number` | `2` | Minimum number of characters inputted to start searching |
+  | `maxLen` | `Number` | `100` | Native input 'maxlength' attribute |
   | `disabled` | `Boolean` | `false` | Disable the input |
   | `placeholder` | `String` | `''` | Placeholder of the input |
 
