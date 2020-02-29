@@ -13,6 +13,7 @@
         @keydown.enter.prevent="keyEnter"
         @keydown.up.prevent="keyUp"
         @keydown.down.prevent="keyDown"
+        :maxlength="maxLen"
       />
       <slot name="searchSlot" />
     </div>
@@ -68,6 +69,10 @@ export default {
     minLen: {
       type: Number,
       default: () => getDefault('minLen'),
+    },
+    maxLen: {
+      type: Number,
+      default: () => getDefault('maxLen'),
     },
     value: {
       type: [Object, String, Number],
