@@ -2023,9 +2023,9 @@ var script = {
 
       this.$emit('blur', this.searchText); // set timeout for the click event to work
 
-      setTimeout(function () {
-        _this.showList = false;
-      }, 200);
+      // setTimeout(function () {
+      //   _this.showList = false;
+      // }, 200);
     },
     selectItem: function selectItem() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -2036,6 +2036,8 @@ var script = {
         this.searchText = this.setLabel(item);
         this.$emit('selected', item);
       }
+
+      this.showList = false;
 
       this.$emit('input', item);
     },
