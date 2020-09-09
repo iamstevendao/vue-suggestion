@@ -2,7 +2,8 @@
   <div :class="[wrapperClasses, 'vue-suggestion']">
     <div :class="[{ vs__selected: value }, inputWrapperClasses, 'vs__input-group']">
       <input
-        v-model="searchText"
+        v-bind:value="searchText"
+        v-on:input="searchText = $event.target.value"
         type="search"
         :class="[inputClasses, 'vs__input']"
         :placeholder="placeholder"
