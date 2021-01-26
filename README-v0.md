@@ -110,7 +110,7 @@ export default {
     },
     inputChange (text) {
       // your search method
-      this.items = items.filter(item => item.name.contains(text));
+      this.items = this.items.filter(item => item.name.contains(text));
       // now `items` will be showed in the suggestion list
     },
   },
