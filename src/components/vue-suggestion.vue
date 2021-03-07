@@ -3,7 +3,7 @@
     <div :class="[{ vs__selected: value }, inputWrapperClasses, 'vs__input-group']">
       <input
         v-model="searchText"
-        type="search"
+        :type="type"
         :class="[inputClasses, 'vs__input']"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -129,6 +129,10 @@ export default {
     suggestionItemClasses: {
       type: String,
       default: () => getDefault('suggestionItemClasses'),
+    },
+    type: {
+      type: String,
+      default: () => getDefault('type'),
     },
   },
   data() {

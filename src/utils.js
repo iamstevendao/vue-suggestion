@@ -15,6 +15,7 @@ export const defaultOptions = {
   suggestionGroupHeaderClasses: '',
   suggestionItemWrapperClasses: '',
   suggestionItemClasses: '',
+  type: 'search',
 };
 
 export default {

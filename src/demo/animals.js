@@ -99,4 +99,5 @@ export default [
   { id: 98, name: 'Rat', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
   { id: 99, name: 'Moose', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
   { id: 100, name: 'Cra', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
+  { id: 100, name: '123456', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
 ];

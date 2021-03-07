@@ -47,6 +47,7 @@ Your search engine, your CSS, your everything...
   | minLen | Interger | `2` | Minimun number of characters inputted to start searching |
   | disabled | Boolean | `false` | Disable the input |
   | placeholder | String | `''` | Placeholder of the input |
+  | type | String | `search` | Input type |
 
 ### Events
 
