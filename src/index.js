@@ -1,16 +1,35 @@
 import utils, { defaultOptions } from './utils';
 import VueSuggestion from './components/vue-suggestion.vue';
 
-export function install(Vue, customOptions = {}) {
+export function install(app, customOptions = {}) {
   if (install.installed) return;
   install.installed = true;
 
+  const {
+    suggestionOptions: customSuggestionOptions,
+    inputOptions: customInputOptions,
+    ...otherCustomOptions
+  } = customOptions;
+  const {
+    suggestionOptions: defaultSuggestionOptions,
+    inputOptions: defaultInputOptions,
+    ...otherDefaultOptions
+  } = defaultOptions;
+
   utils.options = {
-    ...defaultOptions,
-    ...customOptions,
+    inputOptions: {
+      ...defaultInputOptions,
+      ...customInputOptions,
+    },
+    suggestionOptions: {
+      ...defaultSuggestionOptions,
+      ...customSuggestionOptions,
+    },
+    ...otherDefaultOptions,
+    ...otherCustomOptions,
   };
 
-  Vue.component('vue-suggestion', VueSuggestion);
+  app.component('vue-suggestion', VueSuggestion);
 }
 
 export { VueSuggestion };

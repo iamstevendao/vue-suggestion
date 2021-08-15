@@ -1,26 +1,26 @@
 {
   "name": "vue-suggestion",
   "version": "1.1.0",
-  "description": "Suggestion list input for Vue.js",
+  "description": "Suggestion list input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/iamstevendao/vue-suggestion",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "demo": "vue-cli-service build",
-    "build": "set NODE_ENV=production && npm run build:browser && npm run build:es && npm run build:umd",
-    "build:browser": "rollup --config build/rollup.config.browser.js",
-    "build:es": "rollup --config build/rollup.config.es.js",
-    "build:umd": "rollup --config build/rollup.config.umd.js",
+    "serve": "cd docs && npm run serve",
+    "build": "vue-cli-service build --target lib src/index.js --dest dist",
+    "build:modern": "MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
+    "docs:build": "cd docs && npm run build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "lint:fix": "vue-cli-service lint --fix",
+    "prepublishOnly": "npm run build && npm run build:modern"
   },
   "files": [
     "dist/"
   ],
-  "main": "dist/vue-suggestion.umd.js",
-  "module": "dist/vue-suggestion.esm.js",
-  "unpkg": "dist/vue-suggestion.min.js",
+  "main": "dist/vue-suggestion.umd.min.js",
+  "unpkg": "dist/vue-suggestion.umd.min.js",
+  "jsdelivr": "dist/vue-suggestion.umd.min.js",
   "keywords": [
     "vue",
     "suggestion",
@@ -28,50 +28,27 @@
     "suggestion-vue",
     "v-suggestion"
   ],
-  "devDependencies": {
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.6.0",
-    "@vue/cli-plugin-babel": "^3.0.1",
-    "@vue/cli-plugin-eslint": "^3.0.1",
-    "@vue/cli-plugin-unit-jest": "^3.0.1",
-    "@vue/cli-service": "^3.0.1",
-    "@vue/eslint-config-airbnb": "^4.0.0",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "core-js": "^2.6.5",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "lint-staged": "^8.1.5",
-    "rollup": "^1.10.0",
-    "rollup-plugin-analyzer": "^3.0.0",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-css-only": "^1.0.0",
-    "rollup-plugin-node-resolve": "^4.2.3",
-    "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-vue": "^5.0.0",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10"
+  "dependencies": {
+    "core-js": "^3.14.0",
+    "vue": "^2.6.14"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "vue"
-    ],
-    "moduleNameMapper": {
-      "^[/](.*)$": "<rootDir>/$1"
-    },
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.14.5",
+    "@vue/cli-plugin-babel": "~5.0.0-beta.2",
+    "@vue/cli-plugin-eslint": "~5.0.0-beta.2",
+    "@vue/cli-plugin-unit-jest": "~5.0.0-beta.2",
+    "@vue/cli-service": "~5.0.0-beta.2",
+    "@vue/eslint-config-airbnb": "^5.3.0",
+    "@vue/test-utils": "^1.2.1",
+    "eslint": "^7.26.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-vue": "^7.11.1",
+    "lint-staged": "^11.0.0",
+    "vue-jest": "^4.0.1",
+    "vue-template-compiler": "^2.6.14"
   }
 }

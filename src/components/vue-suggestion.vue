@@ -1,13 +1,13 @@
 <template>
-  <div :class="[wrapperClasses, 'vue-suggestion']">
-    <div :class="[{ vs__selected: value }, inputWrapperClasses, 'vs__input-group']">
+  <div :class="[styleClasses, 'vue-suggestion']">
+    <div :class="[{ vs__selected: value }, inputOptions.wrapperStyleClasses, 'vs__input-group']">
       <input
         v-model="searchText"
-        :type="type"
-        :class="[inputClasses, 'vs__input']"
-        :placeholder="placeholder"
+        :type="inputOptions.type"
+        :class="[inputOptions.styleClasses, 'vs__input']"
+        :placeholder="inputOptions.placeholder"
         :disabled="disabled"
-        :maxlength="maxLen"
+        :maxlength="inputOptions.maxlength"
         @blur="blur"
         @focus="focus"
         @input="inputChange"
@@ -15,17 +15,21 @@
         @keydown.up.prevent="keyUp"
         @keydown.down.prevent="keyDown"
       />
-      <slot name="searchSlot" />
+      <slot name="input-append" />
     </div>
     <slot v-if="loading" name="loading">
       <div class="vs__loading">Loading...</div>
     </slot>
     <slot v-else-if="showList" name="suggestionList">
-      <div :class="[suggestionListClasses, 'vs__list']">
-        <div v-for="(group, index) in itemGroups" :class="suggestionGroupClasses" :key="index">
+      <div :class="[suggestionOptions.listStyleClasses, 'vs__list']">
+        <div
+          v-for="(group, index) in itemGroups"
+          :class="suggestionOptions.groupStyleClasses"
+          :key="index"
+        >
           <div
             v-if="itemGroups.length > 1 || group.header"
-            :class="[suggestionGroupHeaderClasses, 'vs__group-header']"
+            :class="[suggestionOptions.groupHeaderStyleClasses, 'vs__group-header']"
           >
             {{ group.header }}
           </div>
@@ -34,13 +38,13 @@
             :key="item.vsItemIndex"
             :class="[
               { 'vs__item-active': item.vsItemIndex === cursor },
-              suggestionItemWrapperClasses,
+              suggestionOptions.itemWrapperStyleClasses,
               'vs__list-item',
             ]"
             @click="selectItem(item)"
             @mouseover="cursor = item.vsItemIndex"
           >
-            <div :class="suggestionItemClasses" :is="itemTemplate" :item="item" />
+            <div :class="suggestionOptions.itemStyleClasses" :is="itemTemplate" :item="item" />
           </div>
         </div>
       </div>
@@ -62,6 +66,10 @@ function getDefault(key) {
 export default {
   name: 'VueSuggestion',
   props: {
+    value: {
+      type: [Object, String, Number],
+      default: null,
+    },
     itemTemplate: {
       type: Object,
       default: () => getDefault('itemTemplate'),
@@ -69,14 +77,6 @@ export default {
     minLen: {
       type: Number,
       default: () => getDefault('minLen'),
-    },
-    maxLen: {
-      type: Number,
-      default: () => getDefault('maxLen'),
-    },
-    value: {
-      type: [Object, String, Number],
-      default: () => getDefault('value'),
     },
     setLabel: {
       type: Function,
@@ -94,45 +94,17 @@ export default {
       type: Boolean,
       default: () => getDefault('loading'),
     },
-    placeholder: {
-      type: String,
-      default: () => getDefault('placeholder'),
+    styleClasses: {
+      type: [Object, String, Number],
+      default: () => getDefault('styleClasses'),
     },
-    inputClasses: {
-      type: String,
-      default: () => getDefault('inputClasses'),
+    inputOptions: {
+      type: Object,
+      default: () => getDefault('inputOptions'),
     },
-    wrapperClasses: {
-      type: String,
-      default: () => getDefault('wrapperClasses'),
-    },
-    inputWrapperClasses: {
-      type: String,
-      default: () => getDefault('inputWrapperClasses'),
-    },
-    suggestionListClasses: {
-      type: String,
-      default: () => getDefault('suggestionListClasses'),
-    },
-    suggestionGroupClasses: {
-      type: String,
-      default: () => getDefault('suggestionGroupClasses'),
-    },
-    suggestionGroupHeaderClasses: {
-      type: String,
-      default: () => getDefault('suggestionGroupHeaderClasses'),
-    },
-    suggestionItemWrapperClasses: {
-      type: String,
-      default: () => getDefault('suggestionItemWrapperClasses'),
-    },
-    suggestionItemClasses: {
-      type: String,
-      default: () => getDefault('suggestionItemClasses'),
-    },
-    type: {
-      type: String,
-      default: () => getDefault('type'),
+    suggestionOptions: {
+      type: Object,
+      default: () => getDefault('suggestionOptions'),
     },
   },
   data() {
@@ -150,7 +122,7 @@ export default {
           ...crr,
           vsItemIndex: index,
         };
-        const foundGroup = prv.find(gr => gr.header === groupName);
+        const foundGroup = prv.find((gr) => gr.header === groupName);
         if (foundGroup) {
           foundGroup.items.push(item);
         } else {

@@ -3,16 +3,16 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
-    jest: true,
+    'node': true,
   },
   extends: [
     'plugin:vue/essential',
     '@vue/airbnb',
+    'plugin:jest/recommended',
   ],
   plugins: ['vue'],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
   // add your custom rules here
   rules: {
@@ -24,19 +24,13 @@ module.exports = {
         'el',
       ]
     }],
+    'func-names': 'off',
     'no-console': [
-      'error',
+      'warn',
       { allow: ['warn', 'error'] },
     ],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-underscore-dangle': [
-      'error',
-      {
-        allow: [
-          '__vueClickOutside__'
-        ]
-      }
-    ],
+    'jest/prefer-to-have-length': 'warn',
   },
 }
