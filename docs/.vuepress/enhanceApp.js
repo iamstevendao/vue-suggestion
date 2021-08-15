@@ -1,8 +1,8 @@
 // enhanceApp.js
 
-import VueTelInput from '../../src/index.js';
+import VueSuggestion from '../../src/index.js';
 
 export default ({ Vue, options }) => {
-  Vue.use(VueTelInput);
+  Vue.use(VueSuggestion);
   Vue.config.productionTip = false;
 }
