@@ -54,6 +54,13 @@ module.exports = {
                 'slots',
               ]
             },
+            {
+              title: 'Others',
+              collapsable: false,
+              children: [
+                'v1',
+              ],
+            },
           ]
         }
       }

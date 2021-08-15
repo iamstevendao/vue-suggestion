@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/base:8
+      - image: cypress/base:10
 
     branches:
       ignore:
@@ -25,6 +25,10 @@ jobs:
             - node_modules
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+
+      - run:
+          name: Installing docs dependencies
+          command: cd docs && npm ci --prefer-offline && cd ..
 
       - run:
           name: Build demo

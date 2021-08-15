@@ -16,7 +16,8 @@
     "prepublishOnly": "npm run build && npm run build:modern"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "dist-modern/"
   ],
   "main": "dist/vue-suggestion.umd.min.js",
   "unpkg": "dist/vue-suggestion.umd.min.js",
@@ -48,6 +49,7 @@
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-vue": "^7.11.1",
     "lint-staged": "^11.0.0",
+    "postcss": "^8.3.6",
     "vue-jest": "^4.0.1",
     "vue-template-compiler": "^2.6.14"
   }
