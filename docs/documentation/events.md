@@ -1,10 +1,10 @@
 # Events
 
-### @changed
+### @changed (searchText: String)
 
 Fires when the input changes with the argument is the current input text.
 
-### @selected
+### @selected (item: String|Object)
 
 Fires when user selects a suggestion
 
@@ -14,16 +14,16 @@ Native enter/return key press event
 
 ### @key-up
 
-Native key-up event
+Native `keydown.up` event
 
 ### @key-down
 
-Native key-down event
+Native `keydown.down` event
 
 ### @focus
 
-Native focus event
+Native `focus` event
 
 ### @blur
 
-Native blur event
+Native `blur` event
