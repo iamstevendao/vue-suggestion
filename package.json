@@ -6,10 +6,11 @@
   "license": "MIT",
   "repository": "https://github.com/iamstevendao/vue-suggestion",
   "scripts": {
-    "serve": "cd docs && npm run serve",
+    "serve": "vuepress dev docs",
     "build": "vue-cli-service build --target lib src/index.js --dest dist",
     "build:modern": "MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
-    "docs:build": "cd docs && npm run build",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
@@ -31,7 +32,7 @@
   ],
   "dependencies": {
     "core-js": "^3.14.0",
-    "vue": "^2.6.14"
+    "vue": "2.6.14"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -51,6 +52,9 @@
     "lint-staged": "^11.0.0",
     "postcss": "^8.3.6",
     "vue-jest": "^4.0.1",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "2.6.14",
+    "vue-server-renderer": "2.6.14",
+    "vuepress": "1.8.2",
+    "webpack": "^4.8.1"
   }
 }
