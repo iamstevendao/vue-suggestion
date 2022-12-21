@@ -42,6 +42,13 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'inputOptions.id',
+    default: '',
+    type: String,
+    description: 'Native input <code>id</code> attribute',
+    inDemo: false,
+  },
+  {
     name: 'inputOptions.maxlength',
     type: Number,
     default: 100,

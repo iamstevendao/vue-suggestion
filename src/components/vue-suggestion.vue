@@ -8,6 +8,7 @@
         :placeholder="inputOptions.placeholder"
         :disabled="disabled"
         :maxlength="inputOptions.maxlength"
+        :id="inputOptions.id"
         @search="clear"
         @blur="blur"
         @focus="focus"
