@@ -8,6 +8,7 @@
         :placeholder="inputOptions.placeholder"
         :disabled="disabled"
         :maxlength="inputOptions.maxlength"
+        @search="clear"
         @blur="blur"
         @focus="focus"
         @input="inputChange"
@@ -173,6 +174,9 @@ export default {
       if (!this.itemTemplate) {
         console.warn('You need to pass `template` as the suggestion list item template');
       }
+    },
+    clear() {
+      this.$emit('clear');
     },
     focus() {
       this.$emit('focus', this.searchText);

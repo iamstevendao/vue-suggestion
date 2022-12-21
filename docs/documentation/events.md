@@ -12,6 +12,10 @@ Fires when user selects a suggestion
 
 Native enter/return key press event
 
+### @clear
+
+Fires when user clicks the "clear" (x) button on the input (not supported by all browsers)
+
 ### @key-up
 
 Native `keydown.up` event
