@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/',
+  base: '/vue-suggestion/',
   locales: {
     '/': {
       lang: 'en-US',
